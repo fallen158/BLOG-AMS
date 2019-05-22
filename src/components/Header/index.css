@@ -1,0 +1,10 @@
+.trigger{
+    height: 64px;
+    padding: 22px 24px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all .3s,padding 0s;
+}
+.trigger:hover{
+    background: #f3f3f3;
+}
