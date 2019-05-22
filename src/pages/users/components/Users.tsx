@@ -1,10 +1,8 @@
 import React from 'react'
 import { connect } from 'dva'
-import { Table, Pagination, Popconfirm, Button } from 'antd'
+import { Table, Pagination, Popconfirm } from 'antd'
 import styles from './Users.css'
 import { PAGE_SIZE } from '../constants'
-import { routerRedux } from 'dva/router'
-import UserModal from './UserModal.tsx'
 
 function Users({ dispatch, list: dataSource, loading, total, page: current }) {
   function deleteHandler(id) {
@@ -12,29 +10,6 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
       type: 'users/remove',
       payload: id
     })
-  }
-
-  function editHandler(id, values) {
-    dispatch({
-      type: 'users/patch',
-      payload: { id, values }
-    })
-  }
-
-  function createHandler(values) {
-    dispatch({
-      type: 'users/create',
-      payload: values
-    })
-  }
-
-  function pageChangeHandler(page) {
-    dispatch(
-      routerRedux.push({
-        pathname: '/users',
-        query: { page }
-      })
-    )
   }
 
   const columns = [
@@ -57,12 +32,10 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
     {
       title: 'Operation',
       key: 'operation',
-      render: (text, record) => (
+      render: (text, { id }) => (
         <span className={styles.operation}>
-          <UserModal record={record} onOk={editHandler.bind(null, record.id)}>
-            <a>Edit</a>
-          </UserModal>
-          <Popconfirm title="Confirm to delete?" onConfirm={deleteHandler.bind(null, record.id)}>
+          <a href="">Edit</a>
+          <Popconfirm title="Confirm to delete?" onConfirm={deleteHandler.bind(null, id)}>
             <a href="">Delete</a>
           </Popconfirm>
         </span>
@@ -73,14 +46,9 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
   return (
     <div>
       <div>
-        <div className={styles.create}>
-          <UserModal record={{}} onOk={createHandler}>
-            <Button type="primary">Create User</Button>
-          </UserModal>
-        </div>
         <Table
-          loading={loading}
           columns={columns}
+          loading={loading}
           dataSource={dataSource}
           rowKey={(record) => record.id}
           pagination={false}
@@ -90,7 +58,6 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
           total={total}
           current={current}
           pageSize={PAGE_SIZE}
-          onChange={pageChangeHandler}
         />
       </div>
     </div>
