@@ -1,8 +1,9 @@
 import React from 'react'
 import styles from './index.css'
 import { Layout } from 'antd'
-import Sider from '@/components/Sider'
-import Header from '@/components/Header'
+import Sider from './Sider'
+import Header from './Header'
+import Users from './users'
 import { connect } from 'dva'
 
 // import withRouter from 'umi/withRouter'
@@ -20,13 +21,16 @@ const Index: React.FC<IProps> = (props: IProps) => {
   const { collapsed, dispatch } = props
   const { pathname } = props.location
   if (pathname.indexOf('/users') > -1) {
+    return <Users>{props.children}</Users>
+  }
+  if (pathname.indexOf('/404') > -1) {
     return <>{props.children}</>
   }
   function handleToggle(): Function {
-    return dispatch({ type: 'app/toggle' })
+    return dispatch({ type: 'global/toggle' })
   }
   return (
-    <Layout className={styles.root}>
+    <Layout className={styles.container}>
       <Sider collapsed={collapsed} />
       <Layout>
         <Header onClick={handleToggle} collapsed={collapsed} />
@@ -49,7 +53,7 @@ const Index: React.FC<IProps> = (props: IProps) => {
 }
 
 const mapStateToProps = (state) => {
-  const { collapsed } = state.app
+  const { collapsed } = state.global
   return {
     collapsed
   }

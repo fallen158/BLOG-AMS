@@ -1,0 +1,11 @@
+.container{
+  background: url('../../assets/users.jpg') no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: var(--pageHeight);
+ }
+
+ .logo{
+   margin-top: 100px;
+     text-align: center; 
+ }

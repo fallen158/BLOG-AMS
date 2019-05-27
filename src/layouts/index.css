@@ -1,16 +1,17 @@
-.root {
-  min-height: 100vh;
-}
-.fade-enter {
-  opacity: 0;
-  z-index: 1;
-}
-
-.fade-enter.fade-enter-active {
-  opacity: 1;
-  transition: opacity 250ms ease-in;
+html,
+body,
+#root {
+  height: 100%;
+  font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
 }
 
 :root {
+  --pageHeight: 100vh;
   --themeBackground: #fff;
+  --errorPageColor: #84d49e;
+}
+
+
+.container {
+  min-height: var(--pageHeight);
 }

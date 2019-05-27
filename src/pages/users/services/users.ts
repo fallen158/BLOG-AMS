@@ -8,3 +8,8 @@ export function remove(id) {
     method: 'DELETE',
   })
 }
+export function login() {
+  return request(`/api/user/login`, {
+    method: 'POST',
+  })
+}
