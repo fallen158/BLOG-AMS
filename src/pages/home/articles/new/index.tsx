@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Tags from '@/components/Tags'
 import { Input, Tag } from 'antd'
 const { TextArea } = Input
+import UploadImg from '@/components/UploadFile'
 
 // 引入编辑器组件
 import BraftEditor from 'braft-editor'
@@ -10,8 +11,7 @@ import 'braft-editor/dist/index.css'
 import Markdown from 'braft-extensions/dist/markdown'
 
 const options = {
-  includeEditors: ['editor-id-1'],
-  excludeEditors: ['editor-id-2']
+  includeEditors: ['editor-id-1']
 }
 
 BraftEditor.use(Markdown(options))
@@ -25,6 +25,7 @@ const ArticleEditor: React.FC = () => {
   }
   return (
     <div className='my-component'>
+      <UploadImg/>
       Header Cover:
       Title: <Input placeholder='Basic usage' />
       Summany: <TextArea rows={4} />

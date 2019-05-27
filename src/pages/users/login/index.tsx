@@ -1,31 +1,42 @@
 import React from 'react'
-import { Row, Col, Form, Icon, Input, Button, Checkbox } from 'antd'
+import { Row, Col, Form, Icon, Input, Button, Checkbox, message } from 'antd'
 import styles from './styles.css'
 import Link from 'umi/link'
+import router from 'umi/router'
 import { connect } from 'dva'
-import fetch from 'dva/fetch'
 
+interface IValues {
+  password: string
+  username: string
+  remember: boolean
+}
 interface IProps {
   form: any
-  dispatch: () => {}
+  dispatch: any
 }
-
 const Login: React.SFC<IProps> = (props: IProps) => {
   const { getFieldDecorator } = props.form
   const { dispatch } = props
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
-    props.form.validateFields((err, values) => {
+    props.form.validateFields(async (err: Error, values: IValues) => {
       if (!err) {
-        const { username, password, remember } = values
+        const { username, password } = values
         console.log('Received values of form: ', values)
-        dispatch({
+        const { error, msg } = await dispatch({
           type: 'users/login',
           payload: {
             username,
             password
           }
         })
+
+        console.log(error, msg)
+        if (error === 'success') {
+          message.success(msg)
+          return router.push('/home')
+        }
+        return message.error(msg)
       }
     })
   }
@@ -42,6 +53,7 @@ const Login: React.SFC<IProps> = (props: IProps) => {
                 prefix={<Icon type="user" className={styles.item} />}
                 placeholder="Username"
                 className={styles.input}
+                size="large"
               />
             )}
           </Form.Item>
@@ -54,6 +66,7 @@ const Login: React.SFC<IProps> = (props: IProps) => {
                 type="password"
                 placeholder="Password"
                 className={styles.input}
+                size="large"
               />
             )}
           </Form.Item>
@@ -66,7 +79,7 @@ const Login: React.SFC<IProps> = (props: IProps) => {
                 })(<Checkbox className={styles.item}>Remember me</Checkbox>)}
               </Col>
               <Col>
-                <Link to="/users/register" className={styles.item}>
+                <Link to="/users/login" className={styles.item}>
                   Forget Password ?
                 </Link>
               </Col>
@@ -79,7 +92,7 @@ const Login: React.SFC<IProps> = (props: IProps) => {
               </Col>
               <Col span={24}>
                 Don't have an account yet ?{' '}
-                <Link to="/users/register" className={styles.link}>
+                <Link to="/users/login" className={styles.link}>
                   Sing Up!
                 </Link>
               </Col>
@@ -93,12 +106,11 @@ const Login: React.SFC<IProps> = (props: IProps) => {
 
 const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(Login)
 
-function mapStateTopProps(state) {
-  const { msg, name, token } = state.users
-  // console.log(state)
+function mapStateTopProps(state: any) {
+  const { msg, error, token } = state.users
   return {
     msg,
-    name,
+    error,
     token
   }
 }

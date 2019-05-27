@@ -1,25 +1,27 @@
 import * as userServices from '@/services/user'
+
+interface IUserState {
+  token: string
+  msg: string
+}
+
 export default {
   namespace: 'users',
   state: {
     token: '',
-    name: '',
-    redirect: '/',
-    msg: ''
+    msg: '',
+    error: ''
   },
   reducers: {
-    save(state, { payload: { name, msg, token } }) {
-      console.log(name, msg, token)
-      return { ...state, name, msg, token }
+    save(state: IUserState, { payload: { msg, token, error } }) {
+      return { ...state, msg, token, error }
     }
   },
   effects: {
     *login({ payload: { username, password } }, { call, put }) {
-      const { name, msg, token } = yield call(userServices.login, { username, password })
-      yield put({ type: 'save', payload: { name, msg, token } })
-    },
-    *register() {
-
+      const { msg, token, error } = yield call(userServices.login, { username, password })
+      yield put({ type: 'save', payload: { msg, token, error } })
+      return { msg, error }
     }
   },
   subscriptions: {
