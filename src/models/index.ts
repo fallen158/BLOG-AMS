@@ -4,7 +4,7 @@ interface IState {
 }
 
 export default {
-  namespace: 'app',
+  namespace: 'global',
   state: {
     count: 0,
     collapsed: false

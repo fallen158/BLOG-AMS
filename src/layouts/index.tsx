@@ -1,12 +1,12 @@
 import React from 'react'
 import styles from './index.css'
 import { Layout } from 'antd'
-import Sider from '@/layouts/Sider'
-import Header from '@/layouts/Header'
+import Sider from './Sider'
+import Header from './Header'
+import Users from './users'
 import { connect } from 'dva'
 
-// import withRouter from 'umi/withRouter'
-// import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 const { Content, Footer } = Layout
 interface IProps {
@@ -20,13 +20,16 @@ const Index: React.FC<IProps> = (props: IProps) => {
   const { collapsed, dispatch } = props
   const { pathname } = props.location
   if (pathname.indexOf('/users') > -1) {
+    return <Users>{props.children}</Users>
+  }
+  if (pathname.indexOf('/404') > -1) {
     return <>{props.children}</>
   }
-  function handleToggle (): Function {
-    return dispatch({ type: 'app/toggle' })
+  function handleToggle(): Function {
+    return dispatch({ type: 'global/toggle' })
   }
   return (
-    <Layout className={styles.root}>
+    <Layout className={styles.container}>
       <Sider collapsed={collapsed} />
       <Layout>
         <Header onClick={handleToggle} collapsed={collapsed} />
@@ -36,11 +39,18 @@ const Index: React.FC<IProps> = (props: IProps) => {
             padding: 24,
             background: '#fff',
             minHeight: 280
-            // height: 300,
-            // overflow: 'auto'
           }}
         >
-          {props.children}
+          <TransitionGroup>
+            <CSSTransition
+              key={props.location.pathname}
+              classNames={['fade', 'spread'][parseInt(Math.random(), 10)]}
+              timeout={1000}
+            >
+              {props.children}
+            </CSSTransition>
+          </TransitionGroup>
+          
         </Content>
         <Footer style={{ textAlign: 'center' }}>UMI ©2019 Created Fallen Blog AMS</Footer>
       </Layout>
@@ -49,7 +59,7 @@ const Index: React.FC<IProps> = (props: IProps) => {
 }
 
 const mapStateToProps = (state) => {
-  const { collapsed } = state.app
+  const { collapsed } = state.global
   return {
     collapsed
   }

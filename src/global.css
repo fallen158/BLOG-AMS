@@ -1,7 +1,61 @@
+:root {
+  --pageHeight: 100vh;
+  --themeBackground: #fff;
+  --errorPageColor: #84d49e;
+  --gray: #6c7293;
+  --prompt: #a7abc3;
+
+  /* --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #5867dd;
+    --secondary: #e1e1ef;
+    --success: #0abb87;
+    --info: #5578eb;
+    --warning: #ffb822;
+    --danger: #fd397a;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1399px; */
+}
+
 html,
 body,
 #root {
   height: 100%;
   font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
+}
 
+.fade-appear,
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-appear-active,
+.fade-enter-active {
+  transition: opacity 0.3s linear;
+  opacity: 1;
+}
+
+.fade-exit {
+  transition: opacity 0.2s linear;
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
 }
