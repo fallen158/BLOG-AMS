@@ -1,4 +1,4 @@
-import { IConfig } from 'umi-types';
+import { IConfig } from 'umi-types'
 
 // ref: https://umijs.org/config/
 const config: IConfig = {
@@ -23,18 +23,18 @@ const config: IConfig = {
           /services\//,
           /model\.(t|j)sx?$/,
           /service\.(t|j)sx?$/,
-          /components\//,
-        ],
-      },
-    }],
+          /components\//
+        ]
+      }
+    }]
   ],
   proxy: {
-    "/api": {
-      "target": "http://jsonplaceholder.typicode.com/",
-      "changeOrigin": true,
-      "pathRewrite": { "^/api": "" }
+    '/api': {
+      'target': 'http://localhost:5858/api',
+      'changeOrigin': true,
+      'pathRewrite': { '^/api': '' }
     }
-  },
+  }
 }
 
-export default config;
+export default config

@@ -5,14 +5,14 @@ import enUS from 'antd/lib/locale-provider/en_US'
 
 const App = () => (
   <div>
-    <Pagination defaultCurrent={1} total={50} showSizeChanger />
+    <Pagination defaultCurrent={1} total={50} showSizeChanger={true} />
   </div>
 )
 
 const All = () => {
   return (
     <LocaleProvider locale={zhCN}>
-      <Pagination defaultCurrent={1} total={50} showSizeChanger />
+      <Pagination defaultCurrent={1} total={50} showSizeChanger={true} />
     </LocaleProvider>
   )
 }

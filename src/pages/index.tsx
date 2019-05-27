@@ -2,7 +2,7 @@ import React from 'react'
 import { formatMessage } from 'umi-plugin-locale'
 import styles from './index.css'
 
-export default function() {
+export default function () {
   return (
     <div className={styles.normal}>
       <div className={styles.welcome} />
@@ -11,7 +11,7 @@ export default function() {
           To get started, edit <code>src/pages/index.js</code> and save to reload.
         </li>
         <li>
-          <a href="https://umijs.org/guide/getting-started.html">
+          <a href='https://umijs.org/guide/getting-started.html'>
             {formatMessage({ id: 'index.start' })}
           </a>
         </li>

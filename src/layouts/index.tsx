@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './index.css'
 import { Layout } from 'antd'
-import Sider from '@/components/Sider'
-import Header from '@/components/Header'
+import Sider from '@/layouts/Sider'
+import Header from '@/layouts/Header'
 import { connect } from 'dva'
 
 // import withRouter from 'umi/withRouter'
@@ -22,7 +22,7 @@ const Index: React.FC<IProps> = (props: IProps) => {
   if (pathname.indexOf('/users') > -1) {
     return <>{props.children}</>
   }
-  function handleToggle(): Function {
+  function handleToggle (): Function {
     return dispatch({ type: 'app/toggle' })
   }
   return (

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Modal, Form, Input } from 'antd'
 const FormItem = Form.Item
 class UserEditModal extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       visible: false
@@ -28,7 +28,7 @@ class UserEditModal extends Component {
       }
     })
   }
-  render() {
+  render () {
     const { children } = this.props
     const { getFieldDecorator } = this.props.form
     const { name, email, website } = this.props.record
@@ -40,23 +40,23 @@ class UserEditModal extends Component {
       <span>
         <span onClick={this.showModelHandler}>{children}</span>
         <Modal
-          title="Edit User"
+          title='Edit User'
           visible={this.state.visible}
           onOk={this.okHandler}
           onCancel={this.hideModelHandler}
         >
-          <Form layout="horizontal" onSubmit={this.okHandler}>
-            <FormItem {...formItemLayout} label="Name">
+          <Form layout='horizontal' onSubmit={this.okHandler}>
+            <FormItem {...formItemLayout} label='Name'>
               {getFieldDecorator('name', {
                 initialValue: name
               })(<Input />)}
             </FormItem>
-            <FormItem {...formItemLayout} label="Email">
+            <FormItem {...formItemLayout} label='Email'>
               {getFieldDecorator('email', {
                 initialValue: email
               })(<Input />)}
             </FormItem>
-            <FormItem {...formItemLayout} label="Website">
+            <FormItem {...formItemLayout} label='Website'>
               {getFieldDecorator('website', {
                 initialValue: website
               })(<Input />)}

@@ -10,18 +10,18 @@ export default {
     collapsed: false
   },
   reducers: {
-    toggle(state) {
+    toggle (state) {
       return {
         ...state,
         collapsed: !state.collapsed
       }
     },
-    add(state: IState) {
+    add (state: IState) {
       return {
         count: state.count + 1
       }
     },
-    minus(state: IState) {
+    minus (state: IState) {
       return {
         count: state.count - 1
       }

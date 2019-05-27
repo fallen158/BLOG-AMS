@@ -42,8 +42,8 @@ class EditableTagGroup extends React.Component {
   forMap = (tag) => {
     const tagElem = (
       <Tag
-        color="#87d068"
-        closable
+        color='#87d068'
+        closable={true}
         onClose={(e) => {
           e.preventDefault()
           this.handleClose(tag)
@@ -59,7 +59,7 @@ class EditableTagGroup extends React.Component {
     )
   }
 
-  render() {
+  render () {
     const { tags, inputVisible, inputValue } = this.state
     const tagChild = tags.map(this.forMap)
     return (
@@ -84,8 +84,8 @@ class EditableTagGroup extends React.Component {
         {inputVisible && (
           <Input
             ref={this.saveInputRef}
-            type="text"
-            size="small"
+            type='text'
+            size='small'
             style={{ width: 78 }}
             value={inputValue}
             onChange={this.handleInputChange}
@@ -95,11 +95,11 @@ class EditableTagGroup extends React.Component {
         )}
         {!inputVisible && (
           <Tag
-            color="magenta"
+            color='magenta'
             onClick={this.showInput}
             style={{ background: '#fff', borderStyle: 'dashed' }}
           >
-            <Icon type="plus" /> New Tag
+            <Icon type='plus' /> New Tag
           </Tag>
         )}
       </div>

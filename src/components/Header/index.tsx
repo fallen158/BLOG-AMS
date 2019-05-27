@@ -40,7 +40,7 @@ const Index: React.SFC<IProps> = (props: IProps) => {
           style={{ paddingRight: '50px' }}
           onClick={() => hanledLocales(v.key)}
         >
-          <span role="img" aria-label={v.text}>
+          <span role='img' aria-label={v.text}>
             {v.icon}
           </span>
           {v.text}
@@ -58,8 +58,8 @@ const Index: React.SFC<IProps> = (props: IProps) => {
         />
       </span>
       <span>
-        <Dropdown overlay={menu} placement="bottomRight">
-          <Icon type="global" className={styles.global} />
+        <Dropdown overlay={menu} placement='bottomRight'>
+          <Icon type='global' className={styles.global} />
         </Dropdown>
       </span>
     </Header>

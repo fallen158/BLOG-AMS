@@ -4,8 +4,8 @@ import { Table, Pagination, Popconfirm } from 'antd'
 import styles from './Users.css'
 import { PAGE_SIZE } from '../constants'
 
-function Users({ dispatch, list: dataSource, loading, total, page: current }) {
-  function deleteHandler(id) {
+function Users ({ dispatch, list: dataSource, loading, total, page: current }) {
+  function deleteHandler (id) {
     dispatch({
       type: 'users/remove',
       payload: id
@@ -17,7 +17,7 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      render: (text) => <a href="">{text}</a>
+      render: (text) => <a href=''>{text}</a>
     },
     {
       title: 'Email',
@@ -34,9 +34,9 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
       key: 'operation',
       render: (text, { id }) => (
         <span className={styles.operation}>
-          <a href="">Edit</a>
-          <Popconfirm title="Confirm to delete?" onConfirm={deleteHandler.bind(null, id)}>
-            <a href="">Delete</a>
+          <a href=''>Edit</a>
+          <Popconfirm title='Confirm to delete?' onConfirm={deleteHandler.bind(null, id)}>
+            <a href=''>Delete</a>
           </Popconfirm>
         </span>
       )
@@ -54,7 +54,7 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
           pagination={false}
         />
         <Pagination
-          className="ant-table-pagination"
+          className='ant-table-pagination'
           total={total}
           current={current}
           pageSize={PAGE_SIZE}
@@ -64,7 +64,7 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
   )
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   const { list, total, page } = state.users
   return {
     list,

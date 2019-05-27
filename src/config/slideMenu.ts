@@ -22,17 +22,17 @@ const menuList: Array<ISiderMenuList> = [
       {
         id: 11,
         name: 'Analysis',
-        url: '/home/dashboard/analysis',
+        url: '/home/dashboard/analysis'
       },
       {
         id: 12,
         name: 'Monitor',
-        url: '/home/dashboard/monitor',
+        url: '/home/dashboard/monitor'
       },
       {
         id: 13,
         name: 'Control',
-        url: '/home/dashboard/control',
+        url: '/home/dashboard/control'
       }
     ]
   },
@@ -45,12 +45,12 @@ const menuList: Array<ISiderMenuList> = [
       {
         id: 21,
         name: 'All Articles',
-        url: '/home/articles/all',
+        url: '/home/articles/all'
       },
       {
         id: 22,
         name: 'New Article',
-        url: '/home/articles/new',
+        url: '/home/articles/new'
       }
     ]
   },
@@ -63,12 +63,12 @@ const menuList: Array<ISiderMenuList> = [
       {
         id: 31,
         name: '所有评论',
-        url: '/comment/31',
+        url: '/comment/31'
       },
       {
         id: 32,
         name: '留言评论',
-        url: '/comment/32',
+        url: '/comment/32'
       }
     ]
   },
@@ -81,7 +81,7 @@ const menuList: Array<ISiderMenuList> = [
       {
         id: 41,
         name: '音乐列表',
-        url: '/music/31',
+        url: '/music/31'
       }
     ]
   },
@@ -94,20 +94,20 @@ const menuList: Array<ISiderMenuList> = [
       {
         id: 51,
         name: '全局配置',
-        url: '/comment/51',
+        url: '/comment/51'
       },
       {
         id: 52,
         name: '个人中心',
-        url: '/comment/52',
+        url: '/comment/52'
       },
       {
         id: 53,
         name: '个人设置',
-        url: '/comment/53',
+        url: '/comment/53'
       }
     ]
   }
-];
+]
 
 export default menuList

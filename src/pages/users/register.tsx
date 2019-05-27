@@ -13,19 +13,19 @@ const Login = (props) => {
   return (
     <div>
       <Row
-        type="flex"
-        justify="center"
-        align="middle"
+        type='flex'
+        justify='center'
+        align='middle'
         style={{ border: '1px solid red', height: '100vh' }}
       >
-        <Form onSubmit={handleSubmit} className="login-form">
+        <Form onSubmit={handleSubmit} className='login-form'>
           <Form.Item>
             {getFieldDecorator('username', {
               rules: [{ required: true, message: 'Please input your username!' }]
             })(
               <Input
-                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="Username"
+                prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder='Username'
               />
             )}
           </Form.Item>
@@ -34,9 +34,9 @@ const Login = (props) => {
               rules: [{ required: true, message: 'Please input your Password!' }]
             })(
               <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="password"
-                placeholder="Password"
+                prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                type='password'
+                placeholder='Password'
               />
             )}
           </Form.Item>
@@ -45,9 +45,9 @@ const Login = (props) => {
               rules: [{ required: true, message: 'Please input your Password!' }]
             })(
               <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="password"
-                placeholder="Password"
+                prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                type='password'
+                placeholder='Password'
               />
             )}
           </Form.Item>
@@ -56,13 +56,13 @@ const Login = (props) => {
               valuePropName: 'checked',
               initialValue: true
             })(<Checkbox>Remember me</Checkbox>)}
-            <a className="login-form-forgot" href="">
+            <a className='login-form-forgot' href=''>
               Forgot password
             </a>
-            <Button type="primary" htmlType="submit" className="login-form-button">
+            <Button type='primary' htmlType='submit' className='login-form-button'>
               Register
             </Button>
-            Or <a href="">register now!</a>
+            Or <a href=''>register now!</a>
           </Form.Item>
         </Form>
       </Row>
