@@ -11,5 +11,7 @@ rules:
   no-debugger: true
   no-reference: true
   jsx-no-multiline-js: false
-  jsx-no-lambda: flase
+  jsx-no-lambda: false
+  no-unnecessary-type-assertion: false
+  no-floating-promises: false
   

@@ -17,7 +17,8 @@
     "rc-tween-one": "^2.4.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-transition-group": "^4.0.1"
+    "react-transition-group": "^4.0.1",
+    "umi-request": "^1.0.7"
   },
   "devDependencies": {
     "@types/jest": "^23.3.12",

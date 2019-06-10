@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './index.css'
 import { Layout } from 'antd'
-import Sider from './Sider'
-import Header from './Header'
+import Sider from './TheSider'
+import Header from './TheHeader'
 import Users from './users'
 import { connect } from 'dva'
 
@@ -44,13 +44,12 @@ const Index: React.FC<IProps> = (props: IProps) => {
           <TransitionGroup>
             <CSSTransition
               key={props.location.pathname}
-              classNames={['fade', 'spread'][parseInt(Math.random(), 10)]}
+              classNames={['fade', 'spread'][Math.random()]}
               timeout={1000}
             >
               {props.children}
             </CSSTransition>
           </TransitionGroup>
-          
         </Content>
         <Footer style={{ textAlign: 'center' }}>UMI ©2019 Created Fallen Blog AMS</Footer>
       </Layout>

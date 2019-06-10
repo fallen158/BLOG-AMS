@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import Tags from '@/components/Tags'
+import Tags from '../components/Tags'
 import { Input, Tag } from 'antd'
 const { TextArea } = Input
-import UploadImg from '@/components/UploadFile'
+import UploadImg from '../components/UploadFile'
 
 // 引入编辑器组件
 import BraftEditor from 'braft-editor'
@@ -17,7 +17,7 @@ const options = {
 BraftEditor.use(Markdown(options))
 
 const ArticleEditor: React.FC = () => {
-  const [ editorState, setEditorState ] = useState(
+  const [editorState, setEditorState] = useState(
     BraftEditor.createEditorState('', { editorId: 'editor-id-1' })
   )
   const handleEditorChange = (editorState) => {
@@ -25,12 +25,13 @@ const ArticleEditor: React.FC = () => {
   }
   return (
     <div className='my-component'>
-      <UploadImg/>
       Header Cover:
+      <UploadImg />
       Title: <Input placeholder='Basic usage' />
-      Summany: <TextArea rows={4} />
-      <BraftEditor value={editorState} onChange={handleEditorChange} id='editor-id-1' />
-      Tags: <Tags/>
+      Author: <Input placeholder='Search user' />
+      Summany: <TextArea rows={4}  placeholder='Please enter the content' />
+      <BraftEditor value={editorState} onChange={handleEditorChange} id='editor-id-1'  />
+      Tags: <Tags />
     </div>
   )
 }

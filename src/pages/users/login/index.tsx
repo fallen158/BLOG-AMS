@@ -1,10 +1,9 @@
 import React from 'react'
 import { Row, Col, Form, Icon, Input, Button, Checkbox, message } from 'antd'
-import styles from './styles.css'
+import styles from './index.css'
 import Link from 'umi/link'
 import router from 'umi/router'
 import { connect } from 'dva'
-
 interface IValues {
   password: string
   username: string
@@ -14,7 +13,8 @@ interface IProps {
   form: any
   dispatch: any
 }
-const Login: React.SFC<IProps> = (props: IProps) => {
+
+const Login: React.FC<IProps> = (props: IProps) => {
   const { getFieldDecorator } = props.form
   const { dispatch } = props
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -22,26 +22,24 @@ const Login: React.SFC<IProps> = (props: IProps) => {
     props.form.validateFields(async (err: Error, values: IValues) => {
       if (!err) {
         const { username, password } = values
-        console.log('Received values of form: ', values)
-        const { error, msg } = await dispatch({
+        const { code, data } = await dispatch({
           type: 'users/login',
           payload: {
             username,
             password
           }
         })
-
-        console.log(error, msg)
-        if (error === 'success') {
-          message.success(msg)
-          return router.push('/home')
+        if (code === 0) {
+          window.localStorage.setItem('CY_TOKEN', data.token)
+          message.success(data.message)
+          return router.push('/')
         }
-        return message.error(msg)
+        return message.error(data.message)
       }
     })
   }
   return (
-    <Row type="flex" justify="center" align="middle" className={styles.container}>
+    <Row type='flex' justify='center' align='middle' className={styles.container}>
       <h3 className={styles.title}>Sing In To Admin</h3>
       <Col lg={{ span: 24 }} sm={{ span: 18 }}>
         <Form onSubmit={handleSubmit} className={styles.form}>
@@ -50,10 +48,10 @@ const Login: React.SFC<IProps> = (props: IProps) => {
               rules: [{ required: true, message: 'Please input your username!' }]
             })(
               <Input
-                prefix={<Icon type="user" className={styles.item} />}
-                placeholder="Username"
+                prefix={<Icon type='user' className={styles.item} />}
+                placeholder='Username'
                 className={styles.input}
-                size="large"
+                size='large'
               />
             )}
           </Form.Item>
@@ -62,16 +60,16 @@ const Login: React.SFC<IProps> = (props: IProps) => {
               rules: [{ required: true, message: 'Please input your Password!' }]
             })(
               <Input
-                prefix={<Icon type="lock" className={styles.item} />}
-                type="password"
-                placeholder="Password"
+                prefix={<Icon type='lock' className={styles.item} />}
+                type='password'
+                placeholder='Password'
                 className={styles.input}
-                size="large"
+                size='large'
               />
             )}
           </Form.Item>
           <Form.Item className={styles.item}>
-            <Row type="flex" justify="space-between">
+            <Row type='flex' justify='space-between'>
               <Col>
                 {getFieldDecorator('remember', {
                   valuePropName: 'checked',
@@ -79,20 +77,20 @@ const Login: React.SFC<IProps> = (props: IProps) => {
                 })(<Checkbox className={styles.item}>Remember me</Checkbox>)}
               </Col>
               <Col>
-                <Link to="/users/login" className={styles.item}>
+                <Link to='/users/login' className={styles.item}>
                   Forget Password ?
                 </Link>
               </Col>
             </Row>
             <Row>
               <Col span={24}>
-                <Button type="primary" onClick={handleSubmit}>
+                <Button type='primary' onClick={handleSubmit}>
                   Sing in
                 </Button>
               </Col>
               <Col span={24}>
                 Don't have an account yet ?{' '}
-                <Link to="/users/login" className={styles.link}>
+                <Link to='/users/login' className={styles.link}>
                   Sing Up!
                 </Link>
               </Col>
@@ -106,7 +104,7 @@ const Login: React.SFC<IProps> = (props: IProps) => {
 
 const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(Login)
 
-function mapStateTopProps(state: any) {
+function mapStateTopProps (state: any) {
   const { msg, error, token } = state.users
   return {
     msg,

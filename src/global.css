@@ -65,7 +65,13 @@ body,
 * 覆盖默认 antd 的css
 */
 
-.ant-form-explain{
+.ant-form-explain {
   text-align: left;
   margin: 10px 0;
 }
+
+.ant-upload.ant-upload-select-picture-card ,.ant-upload-list-picture-card .ant-upload-list-item {
+  width: 344px !important;
+  height: 152px !important;
+}
+

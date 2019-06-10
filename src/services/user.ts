@@ -1,9 +1,14 @@
 import request from '@/utils/request'
 
-export function login({ username, password }) {
-  return request(`/api/users/login`, {
+type ILogin = {
+  username: string,
+  password: string
+}
+
+export function login({ username, password }: ILogin) {
+  return request(`users/login`, {
     method: 'POST', body: JSON.stringify({ username, password }), headers: {
       'content-type': 'application/json'
-    },
+    }
   })
 }

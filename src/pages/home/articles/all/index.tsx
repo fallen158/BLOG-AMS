@@ -1,17 +1,11 @@
-import React from 'react'
-import fetch from 'dva/fetch'
-import { connect } from 'dva'
+import React, { useEffect, useState } from 'react'
 
-const AllComponent = () => {
-  React.useEffect(() => {}, [])
-  return <div>my All</div>
+const AllEditor: React.FC = () => {
+  return (
+    <div className='my-component'>
+      All
+    </div>
+  )
 }
 
-function mapStateTopProps(state) {
-  const { list, total } = state.all
-  return {
-    list,
-    total
-  }
-}
-export default connect(mapStateTopProps)(AllComponent)
+export default AllEditor
