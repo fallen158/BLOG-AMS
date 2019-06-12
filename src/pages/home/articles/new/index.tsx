@@ -1,36 +1,65 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, memo, useCallback } from 'react'
 import Tags from '../components/Tags'
 import { Input, Tag } from 'antd'
 const { TextArea } = Input
 import UploadImg from '../components/UploadFile'
-
-// 引入编辑器组件
+import BrateEditorText from '../components/BrateEditor'
 import BraftEditor from 'braft-editor'
-// 引入编辑器样式
-import 'braft-editor/dist/index.css'
-import Markdown from 'braft-extensions/dist/markdown'
-
-const options = {
-  includeEditors: ['editor-id-1']
-}
-
-BraftEditor.use(Markdown(options))
+import TheInput from '@/components/TheInput'
 
 const ArticleEditor: React.FC = () => {
-  const [editorState, setEditorState] = useState(
-    BraftEditor.createEditorState('', { editorId: 'editor-id-1' })
+  const [picturesState, setPicturesState] = useState({
+    previewVisible: false,
+    previewImage: '',
+    fileList: []
+  })
+  const [brateEditorStore, setBrateEditorStore] = useState(
+    BraftEditor.createEditorState('<p>Hello <b>World!</b></p>')
   )
-  const handleEditorChange = (editorState) => {
-    setEditorState({ editorState })
-  }
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [summary, setSummary] = useState('')
+  const handleTitleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setTitle(event.target.value)
+    },
+    [title]
+  )
+  const handleAuthorChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setAuthor(event.target.value)
+    },
+    [author]
+  )
+  const handleSummanyChange = useCallback(
+    (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setSummary(event.target.value)
+    },
+    [summary]
+  )
+  const submitEditorContent = useCallback((): void => {
+    console.log(brateEditorStore.toHTML())
+  }, [brateEditorStore])
+
+  const handleEditorChange = useCallback(
+    (editorStore: any): void => {
+      setBrateEditorStore(editorStore)
+    },
+    [brateEditorStore]
+  )
   return (
-    <div className='my-component'>
+    <div className="my-component">
       Header Cover:
       <UploadImg />
-      Title: <Input placeholder='Basic usage' />
-      Author: <Input placeholder='Search user' />
-      Summany: <TextArea rows={4}  placeholder='Please enter the content' />
-      <BraftEditor value={editorState} onChange={handleEditorChange} id='editor-id-1'  />
+      Title: <TheInput placeholder="Basic usage" value={title} onChange={handleTitleChange} />
+      Author: <TheInput placeholder="Search user" value={author} onChange={handleAuthorChange} />
+      Summany:{' '}
+      <TextArea rows={4} placeholder="Please enter the content" onChange={handleSummanyChange} />
+      <BrateEditorText
+        store={brateEditorStore}
+        onSave={submitEditorContent}
+        onChange={handleEditorChange}
+      />
       Tags: <Tags />
     </div>
   )
