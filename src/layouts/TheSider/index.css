@@ -2,12 +2,13 @@
   background:  var(--themeBackground);
 }
 .logo {
-  box-shadow: 1px 1px 0 0 #e8e8e8;
+  /* box-shadow: 1px 1px 0 0 #e8e8e8; */
   height: 64px !important;
   overflow: hidden;
   line-height: 64px !important;
   margin-top: 0 !important;
   transition: all 0.3s;
+  background: #002140;
 }
 .logo_img {
   height: 32px;

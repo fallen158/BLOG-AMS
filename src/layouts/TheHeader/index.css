@@ -1,13 +1,11 @@
 .header {
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
   background:  var(--themeBackground);
+  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  font-size: 20px;
+  height: 64px;
+  padding:  0 14px 0 22px; 
 }
 .trigger {
-  height: 64px;
-  padding: 22px 24px;
-  font-size: 20px;
   cursor: pointer;
   transition: all 0.3s, padding 0s;
 }

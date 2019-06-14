@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Layout, Menu, Icon } from 'antd'
 import styles from './index.css'
 import router from 'umi/router'
@@ -10,13 +10,11 @@ interface IProps {
   collapsed: boolean
 }
 
-interface ISelectEvent {
-  key: string
-}
-
 const Index: React.FC<IProps> = (props: IProps) => {
-  const handleLinkRouter = ({ key }: ISelectEvent): void => {
+  const handleMenuSelect = ({ item, key }: any): void => {
     router.push(key)
+    const { children, eventKey, openKeys } = item.props
+    // console.log(children, eventKey, openKeys[openKeys.length - 1])
   }
   return (
     <Sider
@@ -27,11 +25,11 @@ const Index: React.FC<IProps> = (props: IProps) => {
       width='256'
     >
       <Menu
-        theme='light'
+        theme='dark'
         mode='inline'
-        defaultSelectedKeys={['1-1']}
-        defaultOpenKeys={['测试1']}
-        onClick={handleLinkRouter}
+        defaultSelectedKeys={['/home/articles/all']}
+        defaultOpenKeys={['Articles']}
+        onSelect={handleMenuSelect}
       >
         <div className={styles.logo} onClick={() => router.push('/home')}>
           <img
@@ -44,7 +42,7 @@ const Index: React.FC<IProps> = (props: IProps) => {
         {menuLists.length > 1 &&
           menuLists.map((v) => (
             <SubMenu
-              key={v.id}
+              key={v.name}
               title={
                 <span>
                   <Icon type={v.icon} />

@@ -75,3 +75,16 @@ body,
   height: 152px !important;
 }
 
+.ant-page-header .ant-breadcrumb {
+  margin-bottom: 0 !important;
+  font-size: 16px;
+}
+
+/* 
+* 侧边栏
+*/
+.ant-menu-root.ant-menu-inline,.ant-menu-root.ant-menu-vertical,.ant-layout-sider-children{
+  height: 100%;
+  box-shadow: 2px 0 6px rgba(0,21,41,.35);
+  
+}

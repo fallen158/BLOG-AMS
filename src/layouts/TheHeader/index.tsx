@@ -1,14 +1,11 @@
 import React from 'react'
-import { Layout, Icon, Menu, Dropdown } from 'antd'
+import { Layout, Icon, Menu, Dropdown, PageHeader, Row, Col } from 'antd'
 import { setLocale } from 'umi-plugin-locale'
-const { Header } = Layout
 import styles from './index.css'
-
 interface IProps {
   collapsed: boolean
   onClick: () => {}
 }
-
 interface ILangList {
   key: string
   text: string
@@ -25,6 +22,21 @@ const langList: Array<ILangList> = [
     key: 'en-US',
     text: 'English',
     icon: '🇧🇷'
+  }
+]
+
+const routes = [
+  {
+    path: 'index',
+    breadcrumbName: '首页'
+  },
+  {
+    path: 'first',
+    breadcrumbName: '综和实例'
+  },
+  {
+    path: 'second',
+    breadcrumbName: '文章列表'
   }
 ]
 
@@ -49,20 +61,26 @@ const Index: React.SFC<IProps> = (props: IProps) => {
     </Menu>
   )
   return (
-    <Header className={styles.header}>
-      <span>
-        <Icon
-          className={styles.trigger}
-          type={props.collapsed ? 'menu-unfold' : 'menu-fold'}
-          onClick={props.onClick}
-        />
-      </span>
-      <span>
-        <Dropdown overlay={menu} placement='bottomRight'>
-          <Icon type='global' className={styles.global} />
-        </Dropdown>
-      </span>
-    </Header>
+    <Row className={styles.header} type='flex' align='middle'>
+      <Col span={12}>
+        <Row type='flex' align='middle' justify='start'>
+          <Icon
+            className={styles.trigger}
+            type={props.collapsed ? 'menu-unfold' : 'menu-fold'}
+            onClick={props.onClick}
+          />
+
+          <PageHeader title='' breadcrumb={{ routes }} />
+        </Row>
+      </Col>
+      <Col span={12}>
+        <Row type='flex' justify='end'>
+          <Dropdown overlay={menu} placement='bottomRight'>
+            <Icon type='global' className={styles.global} />
+          </Dropdown>
+        </Row>
+      </Col>
+    </Row>
   )
 }
 

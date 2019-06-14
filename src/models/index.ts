@@ -7,7 +7,31 @@ export default {
   namespace: 'global',
   state: {
     count: 0,
-    collapsed: false
+    collapsed: false,
+    // 面包屑
+    breadCrumbList: [
+      {
+        path: 'index',
+        breadcrumbName: '首页'
+      },
+      {
+        path: 'first',
+        breadcrumbName: '综和实例'
+      },
+      {
+        path: 'second',
+        breadcrumbName: '文章列表'
+      }
+    ],
+    // tag分页
+    tagPagingList: [
+      {
+        name: '/home',
+        active: false,
+        visible: false
+      }
+    ],
+    theme: ''
   },
   reducers: {
     toggle (state) {
