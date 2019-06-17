@@ -1,9 +1,4 @@
 import React from 'react'
-
-export interface IDispatch {
-  type: string,
-  payload: {}
-}
 export interface IChangeEventFunc {
   (event: React.ChangeEvent<HTMLInputElement>): void
 }
@@ -17,4 +12,16 @@ export interface IKeyboardEventFunc {
 
 export interface IMouseEventFunc {
   (event: React.MouseEvent<HTMLDivElement, MouseEvent>): void
+}
+
+export interface IEffectsFn {
+  call: Function,
+  put: Function
+}
+export interface IDispatch {
+  type: string,
+  payload: {}
+}
+export interface IHistory {
+  history: History
 }

@@ -5,8 +5,6 @@ extends:
   - tslint-config-standard
 jsRules:
 rules:
- react-hooks/rules-of-hooks : error
-  eofline: true
   no-console: true
   no-construct: true
   no-debugger: true

@@ -5,7 +5,7 @@ const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
-    render: () => { alert(1) }
+    // render: console.log(1)
   },
   {
     title: 'Age',
@@ -19,7 +19,7 @@ const columns = [
     title: 'Action',
     dataIndex: '',
     key: 'x',
-    render: () => { alert(1) }
+    // render: console.log(1)
   }
 ]
 const data = [

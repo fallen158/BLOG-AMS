@@ -5,7 +5,6 @@ const { TextArea } = Input
 import UploadImg from '@/components/UpdateImg'
 import BrateEditorText from './components/BrateEditor'
 import BraftEditor from 'braft-editor'
-import TheInput from '@/components/TheInput'
 import getBase64 from '@/utils/getBase64'
 // import { fetch } from './api/index'
 // import notificationMessage from '@/utils/notification'
@@ -20,19 +19,9 @@ const ArticleEditor: React.FC = () => {
     BraftEditor.createEditorState('<p>Hello <b>World!</b></p>')
   )
   const [title, setTitle] = useState<string>('')
-  const [author, setAuthor] = useState<string>('')
   const [summary, setSummary] = useState<string>('')
-  const [tags, setTags] = useState<Array<string>>(['React', 'Linux', 'Music'])
-  const [tagsInputState, setTagsInputState] = useState<{ visible: boolean; value: string }>({
-    visible: false,
-    value: ''
-  })
-  const handleUpdateImgChange = useCallback(
-    ({ fileList }: any) => {
-      setFileList(fileList)
-    },
-    [fileList]
-  )
+  const [tagsArr, setTagsArr] = useState<Array<string>>(['React', 'Linux', 'Music'])
+  const author = '张三'
   const handleUpadateImgPreview = useCallback(
     async (file: any) => {
       if (!file.url && !file.preview) {
@@ -45,68 +34,12 @@ const ArticleEditor: React.FC = () => {
     },
     [fileList]
   )
-
-  const handlePreviewCancel = useCallback(() => {
-    // console.log(1)
-    setPreviewImg({
-      ...previewImg,
-      visible: false
-    })
-  }, [previewImg.visible])
-
-  const handleTitleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setTitle(event.target.value)
-    },
-    [title]
-  )
-  const handleAuthorChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setAuthor(event.target.value)
-    },
-    [author]
-  )
-  const handleSummanyChange = useCallback(
-    (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-      setSummary(event.target.value)
-    },
-    [summary]
-  )
   const submitEditorContent = useCallback((): void => {
     // console.log(brateEditorStore.toHTML())
   }, [brateEditorStore])
 
-  const handleEditorChange = useCallback(
-    (editorStore: any): void => {
-      setBrateEditorStore(editorStore)
-    },
-    [brateEditorStore]
-  )
-  const showTagsInput = useCallback(() => {
-    setTagsInputState({ ...tagsInputState, visible: true })
-  }, [tagsInputState])
-  const handleTagesClose = useCallback(
-    (removedTag: string) => {
-      const newTags = tags.filter((tag) => tag !== removedTag)
-      setTags(newTags)
-    },
-    [tags]
-  )
-  const handleTagsInputValue = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setTagsInputState({ visible: true, value: e.target.value })
-    },
-    [tagsInputState.value]
-  )
-  const handleTagsInputConfirm = useCallback((): void => {
-    const { value } = tagsInputState
-    if (value && tags.indexOf(value) === -1) {
-      let newTags = [...tags, value]
-      setTags(newTags)
-      setTagsInputState({ value: '', visible: false })
-    }
-  }, [tagsInputState.value])
   const onSubmit = async () => {
+    console.log({ title, author, summary, tagsArr, fileList, content: brateEditorStore })
     // const { code, data } = await fetch(
     //   JSON.stringify({
     //     title,
@@ -126,31 +59,39 @@ const ArticleEditor: React.FC = () => {
       Header Cover:
       <UploadImg
         fileList={fileList}
-        onChange={handleUpdateImgChange}
+        onChange={({ fileList }: any) => {
+          setFileList(fileList)
+        }}
         onPreview={handleUpadateImgPreview}
-        onCancel={handlePreviewCancel}
+        onCancel={() => {
+          setPreviewImg({
+            ...previewImg,
+            visible: false
+          })
+        }}
         visible={previewImg.visible}
         previewImage={previewImg.image}
       />
-      Title: <TheInput placeholder='Basic usage' value={title} onChange={handleTitleChange} />
-      Author: <TheInput placeholder='Search user' value={author} onChange={handleAuthorChange} />
+      Title:{' '}
+      <Input
+        placeholder='Basic usage'
+        value={title}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTitle(event.target.value)}
+      />
+      Author: <Input disabled={true} value={author} />
       Summany:{' '}
-      <TextArea rows={4} placeholder='Please enter the content' onChange={handleSummanyChange} />
+      <TextArea
+        value={summary}
+        rows={4}
+        placeholder='Please enter the content'
+        onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setSummary(event.target.value)}
+      />
       <BrateEditorText
         store={brateEditorStore}
         onSave={submitEditorContent}
-        onChange={handleEditorChange}
+        onChange={(editorStore: any): void => setBrateEditorStore(editorStore)}
       />
-      分类:{' '}
-      <Tags
-        tags={tags}
-        tagState={tagsInputState}
-        showInput={showTagsInput}
-        handleClose={handleTagesClose}
-        handleInputChange={handleTagsInputValue}
-        handleInputConfirm={handleTagsInputConfirm}
-        handleInputKeyboard={handleTagsInputConfirm}
-      />
+      分类: <Tags tagsArr={tagsArr} setTagsArr={setTagsArr} />
       <Button>发布</Button>
       <Button onClick={onSubmit}>保存</Button>
       <Button>预览</Button>

@@ -75,9 +75,13 @@ body,
   height: 152px !important;
 }
 
-.ant-page-header .ant-breadcrumb {
-  margin-bottom: 0 !important;
+.ant-breadcrumb{
   font-size: 16px;
+  margin-left: 20px !important;
+}
+
+.anticon-close{
+  color:inherit !important;
 }
 
 /* 

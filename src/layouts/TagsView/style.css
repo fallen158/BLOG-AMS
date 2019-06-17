@@ -1,0 +1,25 @@
+.tags_active {
+  background-color: #42b983;
+  color: #fff !important;
+  border-color: #42b983;
+}
+.tags_active::before {
+  content: '';
+  background: #fff;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  position: relative;
+  margin-right: 4px;
+}
+
+.tags {
+  border-radius: 0px !important;
+  height: 26px;
+  line-height: 26px;
+  background: #fff !important;
+  color:#495060 !important;
+  padding: 0 8px;
+  cursor: pointer;
+}

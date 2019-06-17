@@ -32,7 +32,7 @@ const Login: React.FC<IProps> = (props: IProps) => {
         if (code === 0) {
           window.localStorage.setItem('CY_TOKEN', data.token)
           message.success(data.message)
-          return router.push('/')
+          return router.push('/home')
         }
         return message.error(data.message)
       }

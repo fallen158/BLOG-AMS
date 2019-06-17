@@ -5,13 +5,14 @@ import ShowPictures from '@/components/ShowPictures'
 interface IChangeFunc {
   ({ fileList }: any): void
 }
+
 interface IProps {
   visible: boolean
   previewImage: string
   fileList: []
   onPreview: (file: any) => {}
   onChange: IChangeFunc
-  onCancel: Function
+  onCancel: any
 }
 
 const uploadButton = (

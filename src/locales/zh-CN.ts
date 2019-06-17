@@ -1,8 +1,8 @@
 export default {
   'index.start': '开始吧1S',
   global: {
-      placeholder: '请选择'
-    },
+    placeholder: '请选择'
+  },
   'menu': '去去去去去',
   Table: {
     filterTitle: '筛选',

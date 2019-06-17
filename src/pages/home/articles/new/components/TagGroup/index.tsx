@@ -1,25 +1,38 @@
 import React, { useRef, useState, useCallback } from 'react'
 import { Tag, Input, Icon } from 'antd'
 import { TweenOneGroup } from 'rc-tween-one'
-import { IFousEventFunc, IKeyboardEventFunc, IMouseEventFunc } from '@/globals'
 
 interface ITagsState {
-  value: string
+  value: string | never
   visible: boolean
 }
-
 interface IProps {
-  tags: Array<string>
-  tagState: ITagsState
-  handleClose: (value: string) => void
-  showInput: IMouseEventFunc
-  handleInputChange: IFousEventFunc
-  handleInputConfirm: IFousEventFunc
-  handleInputKeyboard: IKeyboardEventFunc
+  tagsArr: Array<string>,
+  setTagsArr: Function
 }
 
 const EditableTagGroup: React.FC<IProps> = (props: IProps) => {
-  const { tags, tagState, handleClose, showInput, handleInputChange, handleInputConfirm,handleInputKeyboard } = props
+  const { tagsArr, setTagsArr } = props
+  const [tagState, setTagState] = useState<ITagsState>({
+    value: '',
+    visible: false
+  })
+  const handleTagsInputConfirm = useCallback((): void => {
+    const { value } = tagState
+    if (value && tagsArr.indexOf(value) === -1) {
+      let newTags = [...tagsArr, value]
+      setTagsArr(newTags)
+      setTagState({ value: '', visible: false })
+    }
+  }, [tagState])
+
+  const handleTagesClose = useCallback(
+    (removedTag: string) => {
+      const newTags = tagsArr.filter((tag) => tag !== removedTag)
+      setTagsArr(newTags)
+    },
+    [tagsArr]
+  )
   const TagsItem = (tag: string) => {
     const tagElem = (
       <Tag
@@ -27,7 +40,7 @@ const EditableTagGroup: React.FC<IProps> = (props: IProps) => {
         closable={true}
         onClose={(e: React.ChangeEvent<HTMLFrameElement>) => {
           e.preventDefault()
-          handleClose(tag)
+          handleTagesClose(tag)
         }}
       >
         {tag}
@@ -55,7 +68,7 @@ const EditableTagGroup: React.FC<IProps> = (props: IProps) => {
           leave={{ opacity: 0, width: 0, scale: 0, duration: 200 }}
           appear={false}
         >
-          {tags.map(TagsItem)}
+          {tagsArr.map(TagsItem)}
         </TweenOneGroup>
       </div>
       {tagState.visible && (
@@ -65,15 +78,17 @@ const EditableTagGroup: React.FC<IProps> = (props: IProps) => {
           size='small'
           style={{ width: 78 }}
           value={tagState.value}
-          onChange={handleInputChange}
-          onBlur={handleInputConfirm}
-          onPressEnter={handleInputKeyboard}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setTagState({ visible: true, value: e.target.value })
+          }
+          onBlur={handleTagsInputConfirm}
+          onPressEnter={handleTagsInputConfirm}
         />
       )}
       {!tagState.visible && (
         <Tag
           color='magenta'
-          onClick={showInput}
+          onClick={() => setTagState({ ...tagState, visible: true })}
           style={{ background: '#fff', borderStyle: 'dashed', height: '22px' }}
         >
           <Icon type='plus' /> New Tag
@@ -82,4 +97,4 @@ const EditableTagGroup: React.FC<IProps> = (props: IProps) => {
     </div>
   )
 }
-export default EditableTagGroup
+export default React.memo(EditableTagGroup)

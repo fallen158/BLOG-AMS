@@ -6,15 +6,42 @@ const { Sider } = Layout
 const SubMenu = Menu.SubMenu
 import menuLists from '@/config/slideMenu'
 
+interface ISetBreadCrumbFunc {
+  (params: object[], children: {}): void
+}
 interface IProps {
   collapsed: boolean
+  setBreadCrumb: ISetBreadCrumbFunc
 }
 
 const Index: React.FC<IProps> = (props: IProps) => {
   const handleMenuSelect = ({ item, key }: any): void => {
-    router.push(key)
     const { children, eventKey, openKeys } = item.props
-    // console.log(children, eventKey, openKeys[openKeys.length - 1])
+    const tagsView = {
+      link: eventKey,
+      name: children,
+      active: true,
+      visible: true
+    }
+    const parames = [
+      {
+        path: '/home',
+        breadcrumbName: '首页'
+      },
+      {
+        path: eventKey,
+        breadcrumbName: openKeys[openKeys.length - 1]
+      },
+      {
+        path: eventKey,
+        breadcrumbName: children
+      }
+    ]
+    props.setBreadCrumb(parames, tagsView)
+
+    router.push({
+      pathname: key
+    })
   }
   return (
     <Sider
@@ -27,8 +54,8 @@ const Index: React.FC<IProps> = (props: IProps) => {
       <Menu
         theme='dark'
         mode='inline'
-        defaultSelectedKeys={['/home/articles/all']}
-        defaultOpenKeys={['Articles']}
+        // defaultSelectedKeys={['/home/articles/all']}
+        // defaultOpenKeys={['Articles']}
         onSelect={handleMenuSelect}
       >
         <div className={styles.logo} onClick={() => router.push('/home')}>
